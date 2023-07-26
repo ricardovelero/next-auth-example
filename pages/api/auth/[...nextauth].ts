@@ -6,13 +6,14 @@ import TwitterProvider from "next-auth/providers/twitter"
 import EmailProvider from "next-auth/providers/email"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
+import type { Adapter } from "next-auth/adapters";
 
 const prisma = new PrismaClient();
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     EmailProvider({
       server: process.env.EMAIL_SERVER,
